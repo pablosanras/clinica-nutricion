@@ -1,0 +1,100 @@
+<div id="contenidoPagina">
+    <header id="backoffice">
+        <span></span>
+        <div class="container">
+            <img src="../../../static/img/logotipo.svg" alt="Logotipo del centro de nutrición">
+
+            <nav>
+                <ul>
+                    <li>
+                        <router-link title="Listado de pacientes" class='' v-bind:to='{ name: "dashboardnutricionista" }'>Listado de pacientes</router-link>
+                    </li>
+                    <li>
+                        <router-link class='' v-bind:to='{ name: "cerrarsesion" }'>
+                            <button title="Cerrar sesión">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
+                                Cerrar sesión
+                            </button>
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main id="datosNutricionista">
+        <div class="modalNutricionista">
+            <div class="container">
+                <p>Datos actualizados correctamente</p>            
+            </div>
+        </div>
+        <div class="titulo">
+            <h1>Editar medición del paciente</h1>
+            <span></span>
+        </div>
+        <section id="formularioEdicion">
+            <article>
+                <form v-on:submit.prevent="onSubmit">
+                    <div id="ladoIzq">
+                        <div class="input">
+                            <label for="peso">Peso (kg)</label>
+                            <input v-model="peso" type="number" step="any" name="peso" placeholder="Peso" min="0" max="450" required>
+                        </div>
+                        <div class="input">
+                            <label for="circunferenciCadera">Circunferencia cadera (cm)</label>
+                            <input v-model="circunferenciCadera" type="number" step="any" name="circunferenciCadera" placeholder="Circunferencia cadera" min="0" max="300" required>
+                        </div>
+                        <div class="input">
+                            <label for="circunferenciaCintura">Circunferencia cintura (cm)</label>
+                            <input v-model="circunferenciaCintura" type="number" step="any" name="circunferenciaCintura" placeholder="Circunferencia cintura" min="0" max="300" required>
+                        </div>
+                        <div class="input">
+                            <label for="grasaCorporal">Grasa corporal (%)</label>
+                            <input v-model="grasaCorporal" type="number" step="any" name="grasaCorporal" placeholder="Grasa corporal" min="0" max="100" required>
+                        </div>
+                        <div class="input">
+                            <label for="masaMagra">Masa magra (%)</label>
+                            <input v-model="masaMagra" type="number" step="any" name="masaMagra" placeholder="Masa magra" min="0" max="100" required>
+                        </div>
+                    </div>                
+                    <div id="ladoDch">
+                        <div class="input">
+                            <label for="aguaCorporal">Agua corporal (%)</label>
+                            <input v-model="aguaCorporal" type="number" step="any" name="aguaCorporal" placeholder="Agua corporal" min="0" max="100" required>
+                        </div>
+                        <div class="input">
+                            <label for="resistenciaOhmios">Resistencia Ohmios (Ω)</label>
+                            <input v-model="resistenciaOhmios" type="number" step="any" name="resistenciaOhmios" placeholder="Resistencia Ohmios" min="0" max="1000" required>
+                        </div>
+                        <div class="input">
+                            <label for="perimetroBrazo">Perimetro brazo (cm)</label>
+                            <input v-model="perimetroBrazo" type="number" step="any" name="perimetroBrazo" placeholder="Perimetro brazo" min="0" max="100" required>
+                        </div>
+                        <div class="input">
+                            <label for="imc">IMC</label>
+                            <input v-model="imc" type="number" step="any" name="imc" id="imc" placeholder="IMC" min="0" max="100" required>
+                        </div>
+                    </div>
+                    <div id="grupoBotones">
+                        <router-link title="cancelar" class='' v-bind:to='{ name: "dashboardnutricionistagestionarpaciente", params: { id: datos[0].paciente } }'>                        
+                            <div class="boton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                                </svg>
+                                <span>Cancelar</span>
+                            </div>
+                        </router-link>
+                        <button title="Guardar" type="submit" class="boton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
+                                <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z"/>
+                            </svg>
+                            <span>Guardar</span>
+                        </button>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; Copyright 2022 - Clinica de Nutrición</p>
+    </footer>
+  </div>

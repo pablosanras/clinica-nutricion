@@ -1,0 +1,12 @@
+{
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "16.14.2" // Asigna el número de versión de Node que quieres que se use
+          }
+        }
+      ]
+    ]
+  }

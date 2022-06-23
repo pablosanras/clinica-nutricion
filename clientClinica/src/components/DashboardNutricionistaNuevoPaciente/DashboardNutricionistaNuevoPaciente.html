@@ -1,0 +1,168 @@
+<div id="contenidoPagina">
+    <header id="backoffice">
+        <span></span>
+        <div class="container">
+            <img src="../../../static/img/logotipo.svg" alt="Logotipo del centro de nutrición">
+
+            <nav>
+                <ul>
+                    <li>
+                        <router-link title="Listado de pacientes" class='' v-bind:to='{ name: "dashboardnutricionista" }'>Listado de pacientes</router-link>
+                    </li>
+                    <li>
+                        <router-link class='' v-bind:to='{ name: "cerrarsesion" }'>
+                            <button title="Cerrar sesión">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
+                                Cerrar sesión
+                            </button>
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main id="datosNutricionista">
+        <div class="modalNutricionista">
+            <div class="container">
+                <p>Paciente guardado correctamente</p>            
+            </div>
+        </div>
+        <div class="modalError">
+            <div class="container">
+                <p>DNI ya existe en la plataforma, inserte uno válido</p>            
+            </div>
+        </div>
+        <div class="titulo">
+            <h1>Nuevo paciente</h1>
+            <span></span>
+        </div>
+        <section id="formularioEdicion">
+            <article>
+                <form v-on:submit.prevent="onSubmit">
+                    <div id="ladoIzq">
+                        <div class="input">
+                            <label for="dni">DNI</label>
+                            <input id="dni" type="text" name="dni" v-model="dni" placeholder="DNI" pattern="\d{8}[A-Z]" v-on:blur="validarDNI(dni)" required>
+                            <span style="display:none; color: red;"><i>DNI ya existe en la plataforma</i></span>
+                        </div>
+                        <div class="input">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" name="nombre" v-model="nombre" placeholder="Nombre" pattern="\D*" required>
+                        </div>
+                        <div class="input">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" name="apellidos" v-model="apellidos" placeholder="Apellidos" pattern="\D*" required>
+                        </div>
+                        <div class="input">
+                            <label for="fechaNacimiento">Fecha nacimimento</label>
+                            <input type="text" name="fechaNacimiento" v-model="fechaNacimiento" placeholder="dd/mm/aaaa" pattern="\d{1,2}/\d{1,2}/\d{4}" required>
+                        </div>
+                        <div class="input">
+                            <label for="sexo">Sexo</label>
+                            <select name="sexo" v-model="sexo" required>
+                                <option value="">Seleccione una opción</option>
+                                <option value="Hombre">Hombre</option>
+                                <option value="Mujer">Mujer</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="input">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" name="telefono" v-model="telefono" placeholder="Teléfono" pattern="\d{9}" required>
+                        </div>
+                        <div class="input">
+                            <label for="direccion">Direccion</label>
+                            <input type="text" name="direccion" v-model="direccion" placeholder="Direccion" required>
+                        </div>
+                        <div class="input">
+                            <label for="correo">Correo electrónico</label>
+                            <input type="email" name="correo" v-model="correo" placeholder="Correo electrónico" pattern="\S+@\S+\.\S+" required>
+                        </div>
+                        <div class="input">
+                            <label for="altura">Altura (cm)</label>
+                            <input type="number" name="altura" v-model="altura" placeholder="Altura" min="0" max="250" required>
+                        </div>
+                        <div class="input">
+                            <label for="pesoIdeal">Peso ideal (kg)</label>
+                            <input type="number" step="any" name="pesoIdeal" v-model="pesoIdeal" placeholder="Peso ideal" min="0" max="450" required>
+                        </div>
+                        <div class="input">
+                            <label for="actividadFisica">Actividad fisica</label>
+                            <select name="actividadFisica" v-model="actividadFisica" required>
+                                <option value="">Seleccione una opción</option>
+                                <option value="Actividad fisica nula">Actividad fisica nula</option>
+                                <option value="Actividad fisica ligera">Actividad fisica ligera</option>
+                                <option value="Actividad fisica moderada">Actividad fisica moderada</option>
+                                <option value="Actividad física intensa">Actividad física intensa</option>
+                                <option value="Actividad fisica muy intensa">Actividad fisica muy intensa</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="ladoDch">
+                        <div class="input">
+                            <label for="obesidad">Obesidad</label>
+                            <input v-model="obesidad" type="text" name="obesidad" required>
+                        </div>
+                        <div class="input">
+                            <label for="diabetes">Diabetes</label>
+                            <input v-model="diabetes" type="text" name="diabetes" required>
+                        </div>
+                        <div class="input">
+                            <label for="hipertension">Hipertension</label>
+                            <input v-model="hipertension" type="text" name="hipertension" required>
+                        </div>
+                        <div class="input">
+                            <label for="cardiopatias">Cardiopatias</label>
+                            <input v-model="cardiopatias" type="text" name="cardiopatias" required>
+                        </div>
+                        <div class="input">
+                            <label for="cancer">Cancer</label>
+                            <input v-model="cancer" type="text" name="cancer" required>
+                        </div>
+                        <div class="input">
+                            <label for="alergias">Alergias</label>
+                            <input v-model="alergias" type="text" name="alergias" required>
+                        </div>
+                        <div class="input">
+                            <label for="hepatitis">Hepatitis</label>
+                            <input v-model="hepatitis" type="text" name="hepatitis" required>
+                        </div>
+                        <div class="input">
+                            <label for="hipotiroidismo">Hipotiroidismo</label>
+                            <input v-model="hipotiroidismo" type="text" name="hipotiroidismo" required>
+                        </div>
+                        <div class="input">
+                            <label for="hipertiroidismo">Hipertiroidismo</label>
+                            <input v-model="hipertiroidismo" type="text" name="hipertiroidismo" required>
+                        </div>
+                    </div>
+                    
+                    <div class="textArea">
+                        <label for="observaciones">Observaciones</label>
+                        <textarea v-model="observaciones" name="observaciones" id="observaciones" cols="30" rows="4"></textarea>
+                    </div>
+                    <div id="grupoBotones">
+                        <router-link title="Cancelar" class='' v-bind:to='{ name: "dashboardnutricionista" }'>
+                            <div class="boton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                                </svg>
+                                <span>Cancelar</span>
+                            </div>
+                        </router-link>
+                        <button title="Guardar" type="submit" class="boton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
+                                <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z"/>
+                            </svg>
+                            <span>Guardar</span>
+                        </button>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; Copyright 2022 - Clinica de Nutrición</p>
+    </footer>
+  </div>

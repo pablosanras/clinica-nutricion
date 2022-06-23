@@ -1,0 +1,41 @@
+{
+  "name": "serverclinica",
+  "version": "1.0.0",
+  "description": "App web para la gestión de una clinica de nutrición",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node --require 'babel-register' src/index.js",
+    "watch": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "testBabel": "node_modules/babel-cli/bin/babel.js src/index.js --out-file test/indexCopilado.js"
+  },
+  "keywords": [
+    "nutricion",
+    "clinica"
+  ],
+  "author": "Pablo Sanz Raso",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.14.2",
+    "npm": ">=8.5.0"
+  },
+  "dependencies": {
+    "glob-parent": ">=5.1.2",
+    "jwt-simple": "^0.5.6",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.3.1",
+    "nodemon": "^2.0.15",
+    "standard": "^17.0.0"
+  }
+}

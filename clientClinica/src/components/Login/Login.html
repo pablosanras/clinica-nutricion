@@ -1,0 +1,33 @@
+<div id="contenidoPagina">
+  <header id="login">
+    <span></span>
+  </header>
+  <main>
+    <div class="modalLogin">
+      <div class="container">
+        Usuario o contraseña incorrectos
+      </div>
+    </div>
+    <section class="login">
+      <article>
+        <img src="../../../static/img/logotipo.svg" alt="Logotipo del centro de nutrición" />
+        <h1>Iniciar sesión</h1>
+        <span></span>
+        <form v-on:submit.prevent="onSubmit">
+          <input v-model="usuario" type="text" name="usuario" placeholder="Usuario" pattern="\d{8}[A-Z]" required>
+          <input v-model="contrasena" type="password" name="contrasena" placeholder="Contraseña" required>
+          <div id="botonEnviar">
+            <button title="Iniciar sesión" type="submit">Iniciar sesión</button>
+          </div>
+        </form>
+        <!-- Ruta al componente Home -->
+        <router-link title="Volver a la página de inicio" class='ui basic button' v-bind:to='{ name: "home"}'>
+            <small>Volver a la página de inicio</small>
+        </router-link>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; Copyright 2022 - Clinica de Nutrición</p>
+  </footer>
+</div>

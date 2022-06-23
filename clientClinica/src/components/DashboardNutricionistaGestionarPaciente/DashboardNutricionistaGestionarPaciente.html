@@ -1,0 +1,145 @@
+<div id="contenidoPagina">
+    <header id="backoffice">
+        <span></span>
+        <div class="container">
+            <img src="../../../static/img/logotipo.svg" alt="Logotipo del centro de nutrición">
+
+            <nav>
+                <ul>
+                    <li>
+                        <router-link title="Listado de pacientes" class='' v-bind:to='{ name: "dashboardnutricionista" }'>Listado de pacientes</router-link>
+                    </li>
+                    <li>
+                        <router-link class='' v-bind:to='{ name: "cerrarsesion" }'>
+                            <button title="Cerrar sesión">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
+                                Cerrar sesión
+                            </button>
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main id="datosNutricionista">
+        <div class="modalNutricionista">
+            <div class="container">
+                <p>Usuario creado correctamente</p>            
+            </div>
+        </div>
+        <div class="titulo">
+            <h1>Ficha del paciente</h1>
+            <span></span>
+        </div>
+        <section id="infoPaciente">
+            <article>
+                <h2>Información del paciente</h2>
+                <p>Nombre: {{ detalle.nombre }}</p>
+                <p>Apellidos: {{ detalle.apellidos }}</p>
+                <p>Fecha nacimiento: {{ detalle.fechaNacimiento }}</p>
+                <p>Sexo: {{ detalle.sexo }}</p>
+                <p>Teléfono: {{ detalle.telefono }}</p>
+                <p>Correo: {{ detalle.correo }}</p>
+                <p>Altura: {{ detalle.altura }} cm</p>
+                <p>Peso ideal: {{ detalle.pesoIdeal }} kg</p>
+                <p>Actividad fisica: {{ detalle.actividadFisica }}</p>
+                <p>Observaciones: {{ detalle.observaciones }}</p>
+            </article>
+            <article>
+                <h2>Información clinica</h2>
+                <p>Obesidad: {{ detalle.enfermedades[0].obesidad }}</p>
+                <p>Diabetes: {{ detalle.enfermedades[0].diabetes }}</p>
+                <p>Hipertension: {{ detalle.enfermedades[0].hipertension }}</p>
+                <p>Cardiopatias: {{ detalle.enfermedades[0].cardiopatias }}</p>
+                <p>Cancer: {{ detalle.enfermedades[0].cancer }}</p>
+                <p>Alergias: {{ detalle.enfermedades[0].alergias }}</p>
+                <p>Hepatitis: {{ detalle.enfermedades[0].hepatitis }}</p>
+                <p>Hipotiroidismo: {{ detalle.enfermedades[0].hipotiroidismo }}</p>
+                <p>Hipertiroidismo: {{ detalle.enfermedades[0].hipertiroidismo }}</p>
+            </article>
+        </section>
+        <section id="gestionPaciente">
+            <article>
+                <h2>Edición de la información el paciente</h2>
+                <router-link title="Editar paciente" class='ui button' v-bind:to='{ name: "dashboardnutricionistaeditarpaciente", params: { id: detalle._id }}'>
+                    <button title="Editar paciente" class="boton">Editar paciente</button>
+                </router-link>
+                <router-link title="Nueva dieta" class='ui button' v-bind:to='{ name: "dashboardnutricionistanuevadieta", params: { id: detalle._id }}'>
+                    <button title="Nueva dieta" class="boton">Nueva dieta</button>
+                </router-link>
+                <router-link title="Nueva medición" class='ui button' v-bind:to='{ name: "dashboardnutricionistanuevosdatos", params: { id: detalle._id }}'>
+                    <button title="Nueva medición" class="boton">Nueva medicion</button>
+                </router-link>
+            </article>
+        </section>
+        <section id="tablaPaciente" v-if="datos.length > 0">
+            <h2>Mediciones del paciente</h2>
+            <article>
+                <table class="tablaDatosNutricionista">
+                    <tr>
+                        <th scope="row">Fecha</th>
+                        <th v-for="dato in datos" >{{ dato.fecha }}</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Peso</th>
+                        <td v-for="dato in datos">{{ dato.peso }} kg</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Circunferencia cadera</th>
+                        <td v-for="dato in datos">{{ dato.circunferenciCadera }} cm</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Circunferencia cintura</th>
+                        <td v-for="dato in datos">{{ dato.circunferenciaCintura }} cm</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Grasa corporal</th>
+                        <td v-for="dato in datos">{{ dato.grasaCorporal }} %</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Masa magra</th>
+                        <td v-for="dato in datos">{{ dato.masaMagra }} %</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Agua corporal</th>
+                        <td v-for="dato in datos">{{ dato.aguaCorporal }} %</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Resistencia ohmios</th>
+                        <td v-for="dato in datos">{{ dato.resistenciaOhmios }} Ω</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Perimetro brazo</th>
+                        <td v-for="dato in datos">{{ dato.perimetroBrazo }} cm</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">IMC</th>
+                        <td v-for="dato in datos">{{ dato.imc }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td v-for="dato in datos">
+                            <router-link title="Editar medición" class='ui button' v-bind:to='{ name: "dashboardnutricionistaeditardatos", params: { id: dato._id }}'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                    </svg>
+                            </router-link>
+                            
+                        </td>
+                    </tr>
+                </table>
+            </article>
+        </section>
+        <router-link title="Volver al listado" class='' v-bind:to='{ name: "dashboardnutricionista"}'>   
+            <div class="boton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                </svg>
+                <span>Volver al listado</span>
+            </div>
+        </router-link>
+    </main>
+    <footer>
+        <p>&copy; Copyright 2022 - Clinica de Nutrición</p>
+    </footer>
+</div>

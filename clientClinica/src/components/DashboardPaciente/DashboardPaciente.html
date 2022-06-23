@@ -1,0 +1,279 @@
+<div id="contenidoPagina">
+    <header id="backoffice">
+        <span></span>
+        <div class="container">
+            <img src="../../../static/img/logotipo.svg" alt="Logotipo del centro de nutrición">
+            <nav>
+                <ul>
+                    <li>
+                        <router-link title="Datos" class='activo' v-bind:to='{ name: "dashboardpaciente", params: { id: id }}'>Datos</router-link>
+                    </li>
+                    <li>
+                        <router-link title="Dieta" class='' v-bind:to='{ name: "pacientedieta", params: { id: id }}'>Dieta</router-link>
+                    </li>
+                    <li>
+                        <router-link class='' v-bind:to='{ name: "cerrarsesion" }'>
+                            <button title="Cerrar sesión">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
+                                Cerrar sesión
+                            </button>
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+    <main id="datos">
+        <section id="pacienteDatos">
+            <div class="titulo">
+                <h1>Tu evolución en la dieta:</h1>
+                <span></span>
+            </div>
+            <article v-if="datos.length >= 2">
+                <table class="tablaDatos">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Inicio</th>
+                        <th v-if="datos.length >= 3" scope="col">Revision anterior</th>
+                        <th scope="col">Revision actual</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fecha</th>
+                        <td>{{ datos[0].fecha }}</td>
+                        <td v-if="datos.length >= 3" >{{ datos[datos.length-2].fecha }}</td>
+                        <td>{{ datos[datos.length-1].fecha }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Peso</th>
+                        <td>{{ datos[0].peso }} kg</td>
+                        <td v-if="datos.length >= 3" >{{ datos[datos.length-2].peso }} kg</td>
+                        <td v-if='datos[datos.length-2].peso < datos[datos.length-1].peso' class="alto">
+                            <span>{{ datos[datos.length-1].peso }} kg</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].peso == datos[datos.length-1].peso'>{{ datos[datos.length-1].peso }}
+                            kg</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].peso }} kg</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Circunferencia cadera</th>
+                        <td>{{ datos[0].circunferenciCadera }} cm</td>
+                        <td v-if="datos.length >= 3">{{ datos[datos.length-2].circunferenciCadera }} cm</td>
+                        <td v-if='datos[datos.length-2].circunferenciCadera < datos[datos.length-1].circunferenciCadera' class="alto">
+                            <span>{{ datos[datos.length-1].circunferenciCadera }} cm</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].circunferenciCadera == datos[datos.length-1].circunferenciCadera'>{{ datos[datos.length-1].circunferenciCadera }} cm</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].circunferenciCadera }} cm</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Circunferencia cintura</th>
+                        <td>{{ datos[0].circunferenciaCintura }} cm</td>
+                        <td v-if="datos.length >= 3">{{ datos[datos.length-2].circunferenciaCintura }} cm</td>
+                        <td v-if='datos[datos.length-2].circunferenciaCintura < datos[datos.length-1].circunferenciaCintura' class="alto">
+                            <span>{{ datos[datos.length-1].circunferenciaCintura }}</span> cm
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].circunferenciaCintura == datos[datos.length-1].circunferenciaCintura'>{{ datos[datos.length-1].circunferenciaCintura }} cm</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].circunferenciaCintura }}</span> cm
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Grasa corporal</th>
+                        <td>{{ datos[0].grasaCorporal }} %</td>
+                        <td v-if="datos.length >= 3">{{ datos[datos.length-2].grasaCorporal }} %</td>
+                        <td v-if='datos[datos.length-2].grasaCorporal < datos[datos.length-1].grasaCorporal' class="alto">
+                            <span>{{ datos[datos.length-1].grasaCorporal }}</span> %
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].grasaCorporal == datos[datos.length-1].grasaCorporal'>{{ datos[datos.length-1].grasaCorporal }}
+                            %</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].grasaCorporal }}</span> %
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Masa magra</th>
+                        <td>{{ datos[0].masaMagra }} %</td>
+                        <td v-if="datos.length >= 3">{{ datos[datos.length-2].masaMagra }} %</td>
+                        <td v-if='datos[datos.length-2].masaMagra < datos[datos.length-1].masaMagra' class="alto">
+                            <span>{{ datos[datos.length-1].masaMagra }}</span> %
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].masaMagra == datos[datos.length-1].masaMagra'>{{ datos[datos.length-1].masaMagra }}
+                            %</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].masaMagra }}</span> %
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Agua corporal</th>
+                        <td>{{ datos[0].aguaCorporal }} %</td>
+                        <td v-if="datos.length >= 3">{{ datos[datos.length-2].aguaCorporal }} %</td>
+                        <td v-if='datos[datos.length-2].aguaCorporal < datos[datos.length-1].aguaCorporal' class="alto">
+                            <span>{{ datos[datos.length-1].aguaCorporal }}</span> %
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].aguaCorporal == datos[datos.length-1].aguaCorporal'>{{ datos[datos.length-1].aguaCorporal }}
+                            %</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].aguaCorporal }}</span> %
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Resistencia ohmios</th>
+                        <td>{{ datos[0].resistenciaOhmios }} Ω</td>
+                        <td v-if="datos.length >= 3">{{ datos[datos.length-2].resistenciaOhmios }} Ω</td>
+                        <td v-if='datos[datos.length-2].resistenciaOhmios < datos[datos.length-1].resistenciaOhmios' class="alto">
+                            <span>{{ datos[datos.length-1].resistenciaOhmios }}</span> Ω
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].resistenciaOhmios == datos[datos.length-1].resistenciaOhmios'>{{ datos[datos.length-1].resistenciaOhmios }}
+                            Ω</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].resistenciaOhmios }}</span> Ω
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Perimetro brazo</th>
+                        <td>{{ datos[0].perimetroBrazo }} cm</td>
+                        <td v-if="datos.length >= 3">{{ datos[datos.length-2].perimetroBrazo }} cm</td>
+                        <td v-if='datos[datos.length-2].perimetroBrazo < datos[datos.length-1].perimetroBrazo' class="alto">
+                            <span>{{ datos[datos.length-1].perimetroBrazo }}</span> cm
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].perimetroBrazo == datos[datos.length-1].perimetroBrazo'>{{ datos[datos.length-1].perimetroBrazo }} cm</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].perimetroBrazo }}</span> cm
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">IMC</th>
+                        <td>{{ datos[0].imc }}</td>
+                        <td v-if="datos.length >= 3">{{ datos[datos.length-2].imc }}</td>
+                        <td v-if='datos[datos.length-2].imc < datos[datos.length-1].imc' class="alto">
+                            <span>{{ datos[datos.length-1].imc }}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </td>
+                        <td v-else-if='datos[datos.length-2].imc == datos[datos.length-1].imc'>{{ datos[datos.length-1].imc }}</td>
+                        <td v-else class="bajo">
+                            <span>{{ datos[datos.length-1].imc }}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewbox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+        <article v-else>
+            <table class="tablaDatos">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Inicio</th>
+                </tr>
+                <tr>
+                    <th scope="row">Fecha</th>
+                    <td>{{ datos[0].fecha }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Peso</th>
+                    <td>{{ datos[0].peso }} kg</td>
+                </tr>
+                <tr>
+                    <th scope="row">Circunferencia cadera</th>
+                    <td>{{ datos[0].circunferenciCadera }} cm</td>
+                </tr>
+                <tr>
+                    <th scope="row">Circunferencia cintura</th>
+                    <td>{{ datos[0].circunferenciaCintura }} cm</td>
+                </tr>
+                <tr>
+                    <th scope="row">Grasa corporal</th>
+                    <td>{{ datos[0].grasaCorporal }} %</td>
+                </tr>
+                <tr>
+                    <th scope="row">Masa magra</th>
+                    <td>{{ datos[0].masaMagra }} %</td>
+                </tr>
+                <tr>
+                    <th scope="row">Agua corporal</th>
+                    <td>{{ datos[0].aguaCorporal }} %</td>
+                </tr>
+                <tr>
+                    <th scope="row">Resistencia ohmios</th>
+                    <td>{{ datos[0].resistenciaOhmios }} Ω</td>
+                </tr>
+                <tr>
+                    <th scope="row">Perimetro brazo</th>
+                    <td>{{ datos[0].perimetroBrazo }} cm</td>
+                </tr>
+                <tr>
+                    <th scope="row">IMC</th>
+                    <td>{{ datos[0].imc }}</td>
+                </tr>
+            </tbody>
+        </table>
+        </article>
+    </section>
+</main>
+<footer>
+    <p>&copy; Copyright 2022 - Clinica de Nutrición</p>
+</footer></div><!--
+    
+    Meter en un modal
+        Clasificación del IMC:
+        Bajo peso = menos de 18.5
+        Peso normal = 18.5–24.9
+        Sobrepeso = 25–29.9
+        Obesidad = IMC de 30 ó mayor
+    
+    -->

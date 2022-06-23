@@ -1,0 +1,342 @@
+<div id="contenidoPagina">
+    <header id="backoffice">
+        <span></span>
+        <div class="container">
+            <img src="../../../static/img/logotipo.svg" alt="Logotipo del centro de nutrición">
+                <nav>
+                    <ul>
+                        <li>
+                            <router-link title="Listado de pacientes" class='' v-bind:to='{ name: "dashboardnutricionista" }'>Listado de pacientes</router-link>
+                        </li>
+                        <li>
+                            <router-link class='' v-bind:to='{ name: "cerrarsesion" }'>
+                                <button title="Cerrar sesión">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
+                                    Cerrar sesión
+                                </button>
+                            </router-link>
+                        </li>
+                    </ul>
+                </nav>
+        </div>
+    </header>
+    <main id="datosNutricionista">
+        <div class="modalNutricionista">
+            <div class="container">
+                <p>Dieta guardada correctamente</p>            
+            </div>
+        </div>
+        <div class="titulo">
+            <h1>Editar dieta</h1>
+            <span></span>
+        </div>
+            <section id="formularioDieta">
+                <article>
+                    <form v-on:submit.prevent="onSubmit">                
+                        <div id="lunes" class="activar">
+                            <h2>Lunes</h2>
+                            <div class="input">
+                                <label for="lunesDesayuno">Desayuno</label>
+                                <textarea v-model="lunesDesayuno" name="lunesDesayuno" id="lunesDesayuno" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="lunesAlmuerzo">Almuerzo</label>
+                                <textarea v-model="lunesAlmuerzo" name="lunesAlmuerzo" id="lunesAlmuerzo" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="lunesComida">Comida</label>
+                                <textarea v-model="lunesComida" name="lunesComida" id="lunesComida" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="lunesMerienda">Merienda</label>
+                                <textarea v-model="lunesMerienda" name="lunesMerienda" id="lunesMerienda" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="lunesCena">Cena</label>
+                                <textarea v-model="lunesCena" name="lunesCena" id="lunesCena" cols="30" rows="2" required></textarea>
+                            </div>
+
+                            <div id="grupoBotones">
+                                <div v-if="lunesDesayuno === '' | lunesAlmuerzo === '' | lunesComida === '' | lunesMerienda === '' | lunesCena === '' ">
+                                    <p style="color: red;">Rellena todos los campos para continuar</p>
+                                </div>
+                                <div v-else>
+                                    <div v-on:click="siguiente('lunes')" class="boton">
+                                        <span>Siguiente</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="martes" class="ocultar">
+                            <h2>Martes</h2>
+                            <div class="input">
+                                <label for="martesDesayuno">Desayuno</label>
+                                <textarea v-model="martesDesayuno" name="martesDesayuno" id="martesDesayuno" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="martesAlmuerzo">Almuerzo</label>
+                                <textarea v-model="martesAlmuerzo" name="martesAlmuerzo" id="martesAlmuerzo" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="martesComida">Comida</label>
+                                <textarea v-model="martesComida" name="martesComida" id="martesComida" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="martesMerienda">Merienda</label>
+                                <textarea v-model="martesMerienda" name="martesMerienda" id="martesMerienda" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="martesCena">Cena</label>
+                                <textarea v-model="martesCena" name="martesCena" id="martesCena" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div id="grupoBotones">
+                                <div v-on:click="anterior('martes')" class="boton">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                                    </svg>
+                                    <span>Anterior</span>
+                                </div>
+                                <div v-if="martesDesayuno === '' | martesAlmuerzo === '' | martesComida === '' | martesMerienda === '' | martesCena === '' ">
+                                    <p style="color: red;">Rellena todos los campos para continuar</p>
+                                </div>
+                                <div v-else>
+                                    <div v-on:click="siguiente('martes')" class="boton">
+                                        <span>Siguiente</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="miercoles" class="ocultar">
+                            <h2>Miercoles</h2>
+                            <div class="input">
+                                <label for="miercolesDesayuno">Desayuno</label>
+                                <textarea v-model="miercolesDesayuno" name="miercolesDesayuno" id="miercolesDesayuno" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="miercolesAlmuerzo">Almuerzo</label>
+                                <textarea v-model="miercolesAlmuerzo" name="miercolesAlmuerzo" id="miercolesAlmuerzo" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="miercolesComida">Comida</label>
+                                <textarea v-model="miercolesComida" name="miercolesComida" id="miercolesComida" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="miercolesMerienda">Merienda</label>
+                                <textarea v-model="miercolesMerienda" name="miercolesMerienda" id="miercolesMerienda" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="miercolesCena">Cena</label>
+                                <textarea v-model="miercolesCena" name="miercolesCena" id="miercolesCena" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div id="grupoBotones">
+                                <div v-on:click="anterior('miercoles')" class="boton">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                                    </svg>
+                                    <span>Anterior</span>
+                                </div>
+                                <div v-if="miercolesDesayuno === '' | miercolesAlmuerzo === '' | miercolesComida === '' | miercolesMerienda === '' | miercolesCena === '' ">
+                                    <p style="color: red;">Rellena todos los campos para continuar</p>
+                                </div>
+                                <div v-else>
+                                    <div v-on:click="siguiente('miercoles')" class="boton">
+                                        <span>Siguiente</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="jueves" class="ocultar">
+                            <h2>Jueves</h2>
+                            <div class="input">
+                                <label for="juevesDesayuno">Desayuno</label>
+                                <textarea v-model="juevesDesayuno" name="juevesDesayuno" id="juevesDesayuno" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="juevesAlmuerzo">Almuerzo</label>
+                                <textarea v-model="juevesAlmuerzo" name="juevesAlmuerzo" id="juevesAlmuerzo" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="juevesComida">Comida</label>
+                                <textarea v-model="juevesComida" name="juevesComida" id="juevesComida" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="juevesMerienda">Merienda</label>
+                                <textarea v-model="juevesMerienda" name="juevesMerienda" id="juevesMerienda" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="juevesCena">Cena</label>
+                                <textarea v-model="juevesCena" name="juevesCena" id="juevesCena" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div id="grupoBotones">
+                                <div v-on:click="anterior('jueves')" class="boton">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                                    </svg>
+                                    <span>Anterior</span>
+                                </div>
+                                <div v-if="juevesDesayuno === '' | juevesAlmuerzo === '' | juevesComida === '' | juevesMerienda === '' | juevesCena === '' ">
+                                    <p style="color: red;">Rellena todos los campos para continuar</p>
+                                </div>
+                                <div v-else>
+                                    <div v-on:click="siguiente('jueves')" class="boton">
+                                        <span>Siguiente</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="viernes" class="ocultar">
+                            <h2>Viernes</h2>
+                            <div class="input">
+                                <label for="viernesDesayuno">Desayuno</label>
+                                <textarea v-model="viernesDesayuno" name="viernesDesayuno" id="viernesDesayuno" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="viernesAlmuerzo">Almuerzo</label>
+                                <textarea v-model="viernesAlmuerzo" name="viernesAlmuerzo" id="viernesAlmuerzo" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="viernesComida">Comida</label>
+                                <textarea v-model="viernesComida" name="viernesComida" id="viernesComida" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="viernesMerienda">Merienda</label>
+                                <textarea v-model="viernesMerienda" name="viernesMerienda" id="viernesMerienda" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="viernesCena">Cena</label>
+                                <textarea v-model="viernesCena" name="viernesCena" id="viernesCena" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div id="grupoBotones">
+                                <div v-on:click="anterior('viernes')" class="boton">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                                    </svg>
+                                    <span>Anterior</span>
+                                </div>
+                                <div v-if="viernesDesayuno === '' | viernesAlmuerzo === '' | viernesComida === '' | viernesMerienda === '' | viernesCena === '' ">
+                                    <p style="color: red;">Rellena todos los campos para continuar</p>
+                                </div>
+                                <div v-else>
+                                    <div v-on:click="siguiente('viernes')" class="boton">
+                                        <span>Siguiente</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sabado" class="ocultar">
+                            <h2>Sabado</h2>
+                            <div class="input">
+                                <label for="sabadoDesayuno">Desayuno</label>
+                                <textarea v-model="sabadoDesayuno" name="sabadoDesayuno" id="sabadoDesayuno" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="sabadoAlmuerzo">Almuerzo</label>
+                                <textarea v-model="sabadoAlmuerzo" name="sabadoAlmuerzo" id="sabadoAlmuerzo" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="sabadoComida">Comida</label>
+                                <textarea v-model="sabadoComida" name="sabadoComida" id="sabadoComida" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="sabadoMerienda">Merienda</label>
+                                <textarea v-model="sabadoMerienda" name="sabadoMerienda" id="sabadoMerienda" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="sabadoCena">Cena</label>
+                                <textarea v-model="sabadoCena" name="sabadoCena" id="sabadoCena" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div id="grupoBotones">
+                                <div v-on:click="anterior('sabado')" class="boton">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                                    </svg>
+                                    <span>Anterior</span>
+                                </div>
+                                <div v-if="sabadoDesayuno === '' | sabadoAlmuerzo === '' | sabadoComida === '' | sabadoMerienda === '' | sabadoCena === '' ">
+                                    <p style="color: red;">Rellena todos los campos para continuar</p>
+                                </div>
+                                <div v-else>
+                                    <div v-on:click="siguiente('sabado')" class="boton">
+                                        <span>Siguiente</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="domingo" class="ocultar">
+                            <h2>Domingo</h2>
+                            <div class="input">
+                                <label for="domingoDesayuno">Desayuno</label>
+                                <textarea v-model="domingoDesayuno" name="domingoDesayuno" id="domingoDesayuno" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="domingoAlmuerzo">Almuerzo</label>
+                                <textarea v-model="domingoAlmuerzo" name="domingoAlmuerzo" id="domingoAlmuerzo" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="domingoComida">Comida</label>
+                                <textarea v-model="domingoComida" name="domingoComida" id="domingoComida" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="domingoMerienda">Merienda</label>
+                                <textarea v-model="domingoMerienda" name="domingoMerienda" id="domingoMerienda" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="domingoCena">Cena</label>
+                                <textarea v-model="domingoCena" name="domingoCena" id="domingoCena" cols="30" rows="2" required></textarea>
+                            </div>
+                            <div id="grupoBotones">
+                                <div v-on:click="anterior('domingo')" class="boton">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                                    </svg>
+                                    <span>Anterior</span>
+                                </div>
+                                <div v-if="domingoDesayuno === '' | domingoAlmuerzo === '' | domingoComida === '' | domingoMerienda === '' | domingoCena === '' ">
+                                    <p style="color: red;">Rellena todos los campos para continuar</p>
+                                </div>
+                                <div v-else>
+                                    <button title="Guardar" class="boton">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
+                                            <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z"/>
+                                        </svg>
+                                        <span>Guardar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="cancelar">
+                        <router-link title="Cancelar" class='' v-bind:to='{ name: "dashboardnutricionistagestionarpaciente", params: { id: id } }'>
+                            <div class="boton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                                </svg>
+                                <span>Cancelar</span>
+                            </div>
+                        </router-link>
+                    </div>
+                </article>
+            </section>
+    </main>
+    <footer>
+        <p>&copy; Copyright 2022 - Clinica de Nutrición</p>
+    </footer>
+</div>

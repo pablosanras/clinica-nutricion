@@ -1,0 +1,176 @@
+<div id="contenidoPagina">
+    <header id="backoffice">
+        <span></span>
+        <div class="container">
+            <img src="../../../static/img/logotipo.svg" alt="Logotipo del centro de nutrición">
+            <nav>
+                <ul>
+                    <li>
+                        <router-link title="Datos" class='' v-bind:to='{ name: "dashboardpaciente", params: { id: id }}'>Datos</router-link>
+                    </li>
+                    <li>
+                        <router-link title="Dieta" class='activo' v-bind:to='{ name: "pacientedieta", params: { id: id }}'>Dieta</router-link>
+                    </li>
+                    <li>
+                        <router-link class='' v-bind:to='{ name: "cerrarsesion" }'>
+                            <button title="Cerrar sesión">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
+                                Cerrar sesión
+                            </button>
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+    <main id="datos">
+        <section id="pacienteDieta">
+            <div class="titulo">
+                <h1>Dieta semanal</h1>
+                <span></span>
+            </div>
+            <article>
+                <p>{{ mensaje }}</p>
+            </article>
+            <article v-if="dietaCompleta.length > 0">
+                <button title="Lunes" class="accordion">
+                    <span>Lunes</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    </svg>
+                </button>
+                <div class="panel" v-for='dietas in dietaCompleta'>
+                        <h2>Desayuno:</h2>
+                            <p>{{ dietas.lunesDesayuno }}</p>
+                        <h2>Almuerzo:</h2>
+                            <p>{{ dietas.lunesAlmuerzo }}</p>
+                        <h2>Comida:</h2>
+                            <p>{{ dietas.lunesComida }}</p>
+                        <h2>Merienda:</h2>
+                            <p>{{ dietas.lunesMerienda }}</p>
+                        <h2>Cena:</h2>
+                            <p>{{ dietas.lunesCena }}</p>
+                </div>
+                <button title="Martes" class="accordion">
+                    <span>Martes</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    </svg>
+                </button>
+                <div class="panel" v-for='dietas in dietaCompleta'>
+                        <h2>Desayuno:</h2>
+                            <p>{{ dietas.martesDesayuno }}</p>
+                        <h2>Almuerzo:</h2>
+                            <p>{{ dietas.martesAlmuerzo }}</p>
+                        <h2>Comida:</h2>
+                            <p>{{ dietas.martesComida }}</p>
+                        <h2>Merienda:</h2>
+                            <p>{{ dietas.martesMerienda }}</p>
+                        <h2>Cena:</h2>
+                            <p>{{ dietas.martesCena }}</p>                        
+                </div>
+                <button title="Míercoles" class="accordion">
+                    <span>Miércoles</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    </svg>
+                </button>
+                <div class="panel" v-for='dietas in dietaCompleta'>
+                        <h2>Desayuno:</h2>
+                            <p>{{ dietas.miercolesDesayuno }}</p>
+                        <h2>Almuerzo:</h2>
+                            <p>{{ dietas.miercolesAlmuerzo }}</p>
+                        <h2>Comida:</h2>
+                            <p>{{ dietas.miercolesComida }}</p>
+                        <h2>Merienda:</h2>
+                            <p>{{ dietas.miercolesMerienda }}</p>
+                        <h2>Cena:</h2>
+                            <p>{{ dietas.miercolesCena }}</p>
+                </div>
+                <button title="Jueves" class="accordion">
+                    <span>Jueves</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    </svg>
+                </button>
+                <div class="panel" v-for='dietas in dietaCompleta'>
+                        <h2>Desayuno:</h2>
+                            <p>{{ dietas.juevesDesayuno }}</p>
+                        <h2>Almuerzo:</h2>
+                            <p>{{ dietas.juevesAlmuerzo }}</p>
+                        <h2>Comida:</h2>
+                            <p>{{ dietas.juevesComida }}</p>
+                        <h2>Merienda:</h2>
+                            <p>{{ dietas.juevesMerienda }}</p>
+                        <h2>Cena:</h2>
+                            <p>{{ dietas.juevesCena }}</p>
+                </div>
+                <button title="Viernes" class="accordion">
+                    <span>Viernes</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    </svg>
+                </button>
+                <div class="panel" v-for='dietas in dietaCompleta'>
+                        <h2>Desayuno:</h2>
+                            <p>{{ dietas.viernesDesayuno }}</p>
+                        <h2>Almuerzo:</h2>
+                            <p>{{ dietas.viernesAlmuerzo }}</p>
+                        <h2>Comida:</h2>
+                            <p>{{ dietas.viernesComida }}</p>
+                        <h2>Merienda:</h2>
+                            <p>{{ dietas.viernesMerienda }}</p>
+                        <h2>Cena:</h2>
+                            <p>{{ dietas.viernesCena }}</p>
+                </div>
+                <button title="Sábado" class="accordion">
+                    <span>Sábado</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    </svg>
+                </button>
+                <div class="panel" v-for='dietas in dietaCompleta'>
+                        <h2>Desayuno:</h2>
+                            <p>{{ dietas.sabadoDesayuno }}</p>
+                        <h2>Almuerzo:</h2>
+                            <p>{{ dietas.sabadoAlmuerzo }}</p>
+                        <h2>Comida:</h2>
+                            <p>{{ dietas.sabadoComida }}</p>
+                        <h2>Merienda:</h2>
+                            <p>{{ dietas.sabadoMerienda }}</p>
+                        <h2>Cena:</h2>
+                            <p>{{ dietas.sabadoCena }}</p>
+                </div>
+                <button title="Domingo" class="accordion">
+                    <span>Domingo</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    </svg>
+                </button>
+                <div class="panel" v-for='dietas in dietaCompleta'>
+                        <h2>Desayuno:</h2>
+                            <p>{{ dietas.domingoDesayuno }}</p>
+                        <h2>Almuerzo:</h2>
+                            <p>{{ dietas.domingoAlmuerzo }}</p>
+                        <h2>Comida:</h2>
+                            <p>{{ dietas.domingoComida }}</p>
+                        <h2>Merienda:</h2>
+                            <p>{{ dietas.domingoMerienda }}</p>
+                        <h2>Cena:</h2>
+                            <p>{{ dietas.domingoCena }}</p>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; Copyright 2022 - Clinica de Nutrición</p>
+    </footer>
+</div>
