@@ -1,23 +1,19 @@
-#Proyecto final CFGS Desarrollo de Aplicaciones Web
-Pablo Sanz Raso
-IES Ribera de Castilla 
-Curso 2020-2022
-
+# Proyecto final CFGS Desarrollo de Aplicaciones Web
 
 ## Sobre el proyecto
-This is a 100% serious project, and it is made to help the community. There are a lot of cases where young developers face the issue of finding if a number is even, so I 
-decided to help them by creating this beautiful package. Hopefully, someday it will be completed...
-<br />
-It is also important to know if a number is odd, so additionally I created this other package [@samuelmarina/is-odd](https://www.npmjs.com/package/@samuelmarina/is-odd)
+El mundo está cambiando. Cada vez son más las personas que consumen contenido digital, compran o se comunican mediante Internet. 
+<br/>
+El siguiente proyecto aborda la transformación y/o adaptación digital de una clínica de nutrición hacia este nuevo perfil de consumidor. 
+<br/>
+Este proyecto pretende satisfacer esta necesidad, proporcionar a un negocio físico de clínica de nutrición una solución completa que por un lado permita cubrir todo el viaje del del comprador, es decir, ayudar en la captación dando visibilidad a la empresa con la web mostrando la información adecuada, y por otro lado ayudando al profesional sanitario con la gestión del paciente con un entorno privado.
 
-### Contributing
-PLEASE, MAKE A PULL REQUEST SO WE CAN FINISH THIS PROJECT ASAP. Also, give it a star, for the sake of God.
+## Tecnológica usada
+El proyecto está construido en un full stack **MEVN**, compuesto por MongoDB, Express, VueJS y NodeJS, cuatro de las tecnologías más relevantes de la industria, basadas en JavaScript, lo que facilita el trabajo y comunicación entre ellas.
 
 ## Autor
 **Pablo Sanz Raso**
-* [github/samuelmarina](https://github.com/samuelmarina)
-* [youtube/sammillervlogs](https://youtube.com/sammillervlogs)
+* [github.com/pablosanras](https://github.com/pablosanras)
+* [linkedin.com/pablo-sanz-raso/](https://www.linkedin.com/in/pablo-sanz-raso/)
 
-### License
-Copyright © 2021, [Samuel Mariña](https://github.com/samuelmarina).
-Released under the [ISC License](LICENSE).
+## Licencia
+Publicado bajo la [licencia MIT](LICENSE).
